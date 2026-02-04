@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACM-VIT Messenger</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Y2K Decorative bubbles -->
+    <div class="aero-bubbles">
+        <div class="bubble b1"></div>
+        <div class="bubble b2"></div>
+        <div class="bubble b3"></div>
+    </div>
+
+    <div class="app-container">
+        <!-- Left Panel -->
+        <div class="panel left-panel" id="leftPanel">
+            <div class="panel-header">
+                <div class="window-controls">
+                    <button class="window-btn minimize-btn" onclick="toggleLeftPanel()" title="Minimize">
+                        <img src="icons/minimize_window.png" alt="-">
+                    </button>
+                    <button class="window-btn maximize-btn" title="Maximize">
+                        <img src="icons/windows_maximized.png" alt="□">
+                    </button>
+                    <button class="window-btn close-btn" title="Close">
+                        <img src="icons/Close_window.png" alt="×">
+                    </button>
+                </div>
+                <img src="icons/window.png" alt="" class="title-icon">
+                <span class="panel-title">ACM-VIT Messenger</span>
+            </div>
+            <div class="panel-content">
+                <div class="user-profile">
+                    <div class="avatar-container">
+                        <div class="avatar online">
+                            <img src="icons/user.png" alt="Profile">
+                        </div>
+                        <span class="status-indicator"></span>
+                    </div>
+                    <div class="user-info">
+                        <span class="username">ACM Member</span>
+                        <div class="status-dropdown">
+                            <span class="status-dot-small online"></span>
+                            <span class="status-text">Online</span>
+                            <span class="dropdown-arrow">▼</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <nav class="menu-nav">
+                    <a href="#" class="nav-item active" onclick="showChat()">
+                        <img src="icons/chat.png" alt="" class="nav-icon-img" onerror="this.outerHTML='<span class=nav-icon>💬</span>'">
+                        <span>Conversations</span>
+                    </a>
+                    <a href="#" class="nav-item" onclick="showDashboard()">
+                        <img src="icons/calendar.png" alt="" class="nav-icon-img" onerror="this.outerHTML='<span class=nav-icon>📅</span>'">
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <img src="icons/contacts.png" alt="" class="nav-icon-img" onerror="this.outerHTML='<span class=nav-icon>👥</span>'">
+                        <span>Contacts</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <img src="icons/history.png" alt="" class="nav-icon-img" onerror="this.outerHTML='<span class=nav-icon>🕐</span>'">
+                        <span>Recent</span>
+                    </a>
+                </nav>
+
+                <div class="quick-contacts">
+                    <h3>Quick Contacts</h3>
+                    <div class="contact-item">
+                        <div class="contact-avatar gradient-gold online">
+                            <img src="icons/user.png" alt="">
+                        </div>
+                        <span>Arjun K.</span>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-avatar gradient-pink away">
+                            <img src="icons/user_sleep.png" alt="">
+                        </div>
+                        <span>Ananya R.</span>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-avatar gradient-cyan online">
+                            <img src="icons/user.png" alt="">
+                        </div>
+                        <span>Rahul M.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Minimized Left Panel Toggle -->
+        <button class="panel-toggle left-toggle hidden" id="leftToggle" onclick="toggleLeftPanel()">
+            <span>☰</span>
+        </button>
+
+        <!-- Main Content Area -->
+        <div class="main-content" id="mainContent">
+            <!-- Chat View -->
+            <div class="chat-view" id="chatView">
+                <div class="chat-header">
+                    <div class="chat-room-info">
+                        <h2>🚀 ACM-VIT General Chat</h2>
+                        <span class="room-description">Welcome to the official ACM-VIT chat room!</span>
+                    </div>
+                </div>
+                <div class="chat-messages" id="chatMessages">
+                    <!-- Messages will be inserted here -->
+                </div>
+                <div class="chat-input-area">
+                    <div class="input-toolbar">
+                        <button class="toolbar-btn emoticon-btn" title="Emoticons">
+                            <img src="icons/emoticon.png" alt="😊" onerror="this.outerHTML='😊'">
+                        </button>
+                        <button class="toolbar-btn" title="Send File">
+                            <img src="icons/attach.png" alt="📎" onerror="this.outerHTML='📎'">
+                        </button>
+                        <button class="toolbar-btn" title="Send Video Message">
+                            <img src="icons/video.png" alt="🎥" onerror="this.outerHTML='🎥'">
+                        </button>
+                        <button class="toolbar-btn" title="Voice Message">
+                            <img src="icons/mic.png" alt="🎤" onerror="this.outerHTML='🎤'">
+                        </button>
+                    </div>
+                    <div class="input-container">
+                        <input type="text" id="messageInput" placeholder="Type a message..." onkeypress="handleKeyPress(event)">
+                        <button class="send-btn" onclick="sendMessage()">Send</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard View -->
+            <div class="dashboard-view hidden" id="dashboardView">
+                <div class="dashboard-header">
+                    <h2>📅 ACM-VIT Dashboard</h2>
+                    <span class="dashboard-subtitle">Events & Activities Calendar</span>
+                </div>
+                <div class="dashboard-content">
+                    <div class="calendar-container">
+                        <div class="calendar-header">
+                            <button class="cal-nav-btn" onclick="changeMonth(-1)">◀</button>
+                            <h3 id="calendarMonth">February 2026</h3>
+                            <button class="cal-nav-btn" onclick="changeMonth(1)">▶</button>
+                        </div>
+                        <div class="calendar-grid">
+                            <div class="cal-day-header">Sun</div>
+                            <div class="cal-day-header">Mon</div>
+                            <div class="cal-day-header">Tue</div>
+                            <div class="cal-day-header">Wed</div>
+                            <div class="cal-day-header">Thu</div>
+                            <div class="cal-day-header">Fri</div>
+                            <div class="cal-day-header">Sat</div>
+                            <div id="calendarDays"></div>
+                        </div>
+                    </div>
+                    <div class="events-panel">
+                        <h3>📌 Upcoming Events</h3>
+                        <div class="events-list" id="eventsList">
+                            <!-- Events will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Panel - Participants -->
+        <div class="panel right-panel" id="rightPanel">
+            <div class="panel-header">
+                <span class="panel-title">Online Members</span>
+                <span class="member-count" id="memberCount">12 Online</span>
+            </div>
+            <div class="panel-content">
+                <div class="search-box">
+                    <input type="text" placeholder="Search members..." id="memberSearch" oninput="filterMembers()">
+                </div>
+                <div class="members-list" id="membersList">
+                    <!-- Members will be inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
