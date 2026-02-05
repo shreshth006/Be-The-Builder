@@ -333,13 +333,13 @@ export default function ACMMessenger() {
                 onClick={() => setLeftPanelMinimized(true)}
                 title="Minimize"
               >
-                <Image src="/icons/minimize_window.png" alt="-" width={16} height={16} />
+                <Image src="/icons/minimize_window.png" alt="-" width={16} height={16} style={{ width: "auto", height: "auto" }} />
               </button>
               <button className="window-btn maximize-btn" title="Maximize">
-                <Image src="/icons/windows_maximized.png" alt="[]" width={16} height={16} />
+                <Image src="/icons/windows_maximized.png" alt="[]" width={16} height={16} style={{ width: "auto", height: "auto" }} />
               </button>
               <button className="window-btn close-btn" title="Close">
-                <Image src="/icons/Close_window.png" alt="x" width={16} height={16} />
+                <Image src="/icons/Close_window.png" alt="x" width={16} height={16} style={{ width: "auto", height: "auto" }} />
               </button>
             </div>
             <Image src="/icons/window.png" alt="" className="title-icon" width={16} height={16} />
